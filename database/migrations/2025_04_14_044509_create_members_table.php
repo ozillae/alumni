@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('title_back', 100)->nullable();
             $table->string('file_profil', 150)->nullable();
 
-            $table->unsignedBigInteger('province')->nullable(false);
+            $table->string('province', 10)->nullable(false);
             $table->unsignedBigInteger('city')->nullable(false);
-            $table->foreign('province')->references('id')->on('provinces');
+            $table->foreign('province')->references('code')->on('provinces');
             $table->foreign('city')->references('id')->on('cities');
             
 

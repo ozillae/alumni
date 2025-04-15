@@ -22,7 +22,7 @@
 
             <!-- Email -->
             <div class="mt-4">
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email <span class="text-red-500"> *</span></label>
                 <input id="email" type="email" name="email" value="{{ old('email') }}" required
                     class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 @error('email')
@@ -30,9 +30,18 @@
                 @enderror
             </div>
 
+            <div class="flex flex-col mt-4">
+                <label for="phone" class="form-label">Telepon <span class="text-red-500"> *</span></label>
+                <div class="flex items-center">
+                    <button class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100  hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 border" type="button">
+                        +62
+                    </button>
+                    <input type="text" class="w-full" placeholder="81234567890" name="phone" value="{{ old('phone') }}">
+                </div>
+
             <!-- Password -->
             <div class="mt-4">
-                <label for="password" class="block text-sm font-medium text-gray-700">Kata Sandi</label>
+                <label for="password" class="block text-sm font-medium text-gray-700">Kata Sandi <span class="text-red-500"> *</span></label>
                 <input id="password" type="password" name="password" required
                     class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 @error('password')
@@ -42,7 +51,7 @@
 
             <!-- Confirm Password -->
             <div class="mt-4">
-                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Kata Sandi</label>
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Kata Sandi <span class="text-red-500"> *</span></label>
                 <input id="password_confirmation" type="password" name="password_confirmation" required
                     class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
             </div>

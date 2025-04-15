@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,9 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+
+Route::get('/member', [GuestController::class, 'member'])->name('members');
+Route::get('/member-detail/{code}', [GuestController::class, 'memberDetail'])->name('member-detail');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
