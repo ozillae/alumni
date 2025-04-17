@@ -10,12 +10,12 @@
         <form method="POST" action="{{ route('login') }}" class="mt-6">
             @csrf
 
-            <!-- Email -->
+            <!-- Login Field -->
             <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
+                <label for="login" class="block text-sm font-medium text-gray-700">Email atau Nomor Telepon</label>
+                <input id="login" type="text" name="login" value="{{ old('login') }}" required autofocus
                     class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                @error('email')
+                @error('login')
                     <span class="text-sm text-red-500">{{ $message }}</span>
                 @enderror
             </div>
