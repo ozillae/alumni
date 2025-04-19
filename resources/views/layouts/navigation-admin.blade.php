@@ -12,17 +12,17 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
-                        {{ __('Tentang Kami') }}
+                    <x-nav-link :href="route('divisions.index')" :active="request()->routeIs('divisions')">
+                        {{ __('Divisi') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('photos')" :active="request()->routeIs('photos')">
+                    <x-nav-link :href="route('photos.index')" :active="request()->routeIs('photos')">
                         {{ __('Photo') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('videos')" :active="request()->routeIs('videos')">
+                    <x-nav-link :href="route('videos.index')" :active="request()->routeIs('videos')">
                         {{ __('Video') }}
                     </x-nav-link>
                 </div>

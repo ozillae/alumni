@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ProvinceSeeder::class,
             CitySeeder::class,
-            // PaymentTermSeeder::class,
+            DivisionSeeder::class,
             MemberSeeder::class,
     ]);
     }

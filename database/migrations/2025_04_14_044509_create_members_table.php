@@ -24,8 +24,10 @@ return new class extends Migration
 
             $table->string('province', 10)->nullable(false);
             $table->unsignedBigInteger('city')->nullable(false);
+            $table->unsignedBigInteger('division')->nullable(false);
             $table->foreign('province')->references('code')->on('provinces');
             $table->foreign('city')->references('id')->on('cities');
+            $table->foreign('division')->references('id')->on('divisions');
             
 
             $table->enum('status', [1,2,3,4])->default(1);
