@@ -16,9 +16,22 @@
                     <p class="text-gray-700 mb-2"><strong>Kota:</strong> {{ $member->city }}</p>
                     <p class="text-gray-700 mb-2"><strong>Status:</strong> {{ $member->status }}</p>
                     <p class="text-gray-700 mb-2"><strong>Tanggal Bergabung:</strong> {{ $member->joint_date }}</p>
-                    <p class="text-gray-700 mb-4"><strong>Deskripsi:</strong> {{ $member->description }}</p>
+                    <p class="text-gray-700 mb-4"><strong>Deskripsi:</strong> {{ $member->description }}</p>                    
                     <a href="{{ route('members') }}" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Kembali ke Daftar Anggota</a>
                 </div>
+            </div>
+            <div class="p-6">
+                <h2 class="text-xl font-bold">Portfolios</h2>
+                <ul class="list-disc pl-5">
+                    @forelse($member_portos as $porto)
+                        <li>
+                            <strong>{{ $porto->title }}</strong> - {{ $porto->institution }}
+                            <p>{{ $porto->description }}</p>
+                        </li>
+                    @empty
+                        <li>No portfolios available.</li>
+                    @endforelse
+                </ul>
             </div>
         </div>
     </div>

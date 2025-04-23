@@ -3,6 +3,7 @@
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\VideoController;
@@ -34,7 +35,15 @@ Route::get('/videos', [GuestController::class, 'videos'])->name('videos');
 Route::get('/video-detail/{code}', [GuestController::class, 'videoDetail'])->name('video-detail');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $user = auth()->user();
+    if ($user->user_type === 'A') {
+        return redirect()->route('admin.dashboard');
+    } elseif ($user->user_type === 'B') {
+        return redirect()->route('admin2.dashboard');
+    } elseif ($user->user_type === 'C') {
+        return redirect()->route('member.dashboard');
+    }
+    abort(403, 'Unauthorized');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -43,16 +52,31 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::prefix('admin')->middleware(['auth', 'verified', 'useradmin'])->group(function () {
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
         Route::resources([
+            'event' => EventController::class,
             'divisions' => DivisionController::class,
             'photos' => PhotoController::class,
             'videos' => VideoController::class,
+            'members' => MemberController::class,
         ]);
 
 
     });
 
+    Route::prefix('admin2')->middleware(['auth', 'verified', 'useradmin'])->group(function () {
+        Route::get('/dashboard', function () {
+            return view('admin2.dashboard');
+        })->name('admin2.dashboard');
+        // Add additional routes for admin2 if needed
+    });
+
     Route::prefix('member')->middleware(['auth', 'verified', 'usermember'])->group(function () {
+        Route::get('/dashboard', function () {
+            return view('member.dashboard');
+        })->name('member.dashboard');
         Route::resources([
             'member' => MemberController::class,
         ]);

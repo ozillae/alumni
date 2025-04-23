@@ -18,13 +18,21 @@ class GuestController extends Controller
     public function memberDetail($code)
     {
         $member = Member::where('code', $code)->firstOrFail();
-        return view('guest.member-detail', ['member' => $member]);
+        $member_portos = $member->portfolios()->get(); // Fetch related portfolios
+        return view('guest.member-detail', ['member' => $member, 'member_portos' => $member_portos]);
     }
 
     public function photos(Request $request)
     {
         $photos = Photo::paginate(8); 
         return view('guest.photo', ['photos' => $photos]);
+    }
+
+    public function photoDetail($code)
+    {
+        $photo = Photo::where('code', $code)->firstOrFail();
+        $relatedPhotos = Photo::where('code', '!=', $code)->take(5)->get(); // Fetch 5 related photos
+        return view('guest.photo-detail', compact('photo', 'relatedPhotos'));
     }
 
     public function videos(Request $request)

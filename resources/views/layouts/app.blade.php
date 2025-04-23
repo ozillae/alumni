@@ -30,7 +30,7 @@
             <!-- Page Content -->
             @yield('content')
         
-            <footer class="py-4 mt-10 bg-gray-100">
+            <footer class="py-4 mt-10">
                 <!-- Bagian footer -->
                 @include('layouts.footer')
             </footer>

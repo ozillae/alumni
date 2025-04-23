@@ -12,6 +12,16 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('event.index')" :active="request()->routeIs('event')">
+                        {{ __('Kegiatan') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('divisions.index')" :active="request()->routeIs('divisions')">
                         {{ __('Divisi') }}
                     </x-nav-link>
@@ -27,7 +37,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('members')" :active="request()->routeIs('members')">
+                    <x-nav-link :href="route('members.index')" :active="request()->routeIs('members')">
                         {{ __('Anggota') }}
                     </x-nav-link>
                 </div>

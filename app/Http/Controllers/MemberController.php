@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
+use App\Models\Province;
+use App\Models\City;
+use App\Models\Division;
 
 class MemberController extends Controller
 {
@@ -12,7 +15,8 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+        $members = Member::orderBy('id', 'desc')->paginate(10);
+        return view('members.index', compact('members'));
     }
 
     /**
@@ -20,7 +24,10 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+        $provinces = Province::all();
+        $cities = City::all();
+        $divisions = Division::where('active', 1)->get(); // Only active divisions
+        return view('members.create', compact('provinces', 'cities', 'divisions'));
     }
 
     /**
@@ -28,7 +35,21 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'code' => 'required|string|max:20',
+            'name' => 'required|string|max:150',
+            'address' => 'required|string',
+            'phone' => 'required|string|max:16',
+            'email' => 'required|email|max:100',
+            'province' => 'required|string|max:10',
+            'city' => 'required|integer',
+            'division' => 'required|integer',
+            'joint_date' => 'required|date',
+            'description' => 'nullable|string',
+        ]);
+
+        Member::create($validated);
+        return redirect()->route('members.index')->with('success', 'Member created successfully.');
     }
 
     /**
@@ -36,7 +57,8 @@ class MemberController extends Controller
      */
     public function show(Member $member)
     {
-        //
+        $portfolios = $member->portfolios; // Fetch member portfolios
+        return view('members.show', compact('member', 'portfolios'));
     }
 
     /**
@@ -44,7 +66,10 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
-        //
+        $provinces = Province::all();
+        $cities = City::all();
+        $divisions = Division::where('active', 1)->get(); // Only active divisions
+        return view('members.edit', compact('member', 'provinces', 'cities', 'divisions'));
     }
 
     /**
@@ -52,7 +77,21 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
-        //
+        $validated = $request->validate([
+            'code' => 'required|string|max:20',
+            'name' => 'required|string|max:150',
+            'address' => 'required|string',
+            'phone' => 'required|string|max:16',
+            'email' => 'required|email|max:100',
+            'province' => 'required|string|max:10',
+            'city' => 'required|integer',
+            'division' => 'required|integer',
+            'joint_date' => 'required|date',
+            'description' => 'nullable|string',
+        ]);
+
+        $member->update($validated);
+        return redirect()->route('members.index')->with('success', 'Member updated successfully.');
     }
 
     /**
@@ -60,6 +99,7 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member->delete();
+        return redirect()->route('members.index')->with('success', 'Member deleted successfully.');
     }
 }
