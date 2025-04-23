@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Division;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DivisionController extends Controller
 {
@@ -29,16 +30,17 @@ class DivisionController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'code' => 'required|unique:divisions|max:10',
-            'name' => 'required|max:100',
+        $validated = $request->validate([
+            'code' => 'required|unique:divisions|max:255',
+            'name' => 'required|max:255',
             'description' => 'nullable',
+            'active' => 'required|boolean',
         ]);
 
-        Division::create(array_merge($request->all(), [
-            'created_by' => auth()->id(),
-            'updated_by' => auth()->id(),
-        ]));
+        $validated['created_by'] = Auth::id(); // Set the authenticated user as the creator
+        $validated['updated_by'] = Auth::id(); // Set the authenticated user as the updater
+
+        Division::create($validated);
 
         return redirect()->route('divisions.index')->with('success', 'Division created successfully.');
     }
@@ -64,15 +66,16 @@ class DivisionController extends Controller
      */
     public function update(Request $request, Division $division)
     {
-        $request->validate([
-            'code' => 'required|max:10|unique:divisions,code,' . $division->id,
-            'name' => 'required|max:100',
+        $validated = $request->validate([
+            'code' => 'required|unique:divisions,code,' . $division->id . '|max:255',
+            'name' => 'required|max:255',
             'description' => 'nullable',
+            'active' => 'required|boolean',
         ]);
 
-        $division->update(array_merge($request->all(), [
-            'updated_by' => auth()->id(),
-        ]));
+        $validated['updated_by'] = Auth::id(); // Update the updater field
+
+        $division->update($validated);
 
         return redirect()->route('divisions.index')->with('success', 'Division updated successfully.');
     }

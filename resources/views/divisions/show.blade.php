@@ -21,11 +21,11 @@
         </p>
         <p class="mb-2">
             <strong class="text-gray-700 w-32 inline-block">Created By:</strong> 
-            <span class="text-gray-900">{{ $division->created_by }}</span>
+            <span class="text-gray-900">{{ $division->creator ? $division->creator->name : 'N/A' }}</span>
         </p>
         <p class="mb-2">
             <strong class="text-gray-700 w-32 inline-block">Updated By:</strong> 
-            <span class="text-gray-900">{{ $division->updated_by }}</span>
+            <span class="text-gray-900">{{ $division->updater ? $division->updater->name : 'N/A' }}</span>
         </p>
         <p class="mb-2">
             <strong class="text-gray-700 w-32 inline-block">Created At:</strong> 

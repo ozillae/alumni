@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
             return view('admin.dashboard');
         })->name('admin.dashboard');
         Route::resources([
-            'event' => EventController::class,
+            'events' => EventController::class,
             'divisions' => DivisionController::class,
             'photos' => PhotoController::class,
             'videos' => VideoController::class,

@@ -5,17 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Division extends Model
+class Event extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'code',
         'name',
-        'active',
+        'description',
+        'start_date',
+        'end_date',
+        'location',
+        'link_online',
+        'file_event',
         'created_by',
         'updated_by',
-        'description',
     ];
 
     public function creator()
