@@ -19,6 +19,7 @@ class Event extends Model
         'file_event',
         'created_by',
         'updated_by',
+        'active',
     ];
 
     public function creator()

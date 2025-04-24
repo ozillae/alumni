@@ -40,6 +40,7 @@ class EventController extends Controller
             'link_online' => 'nullable|string|max:255',
             'file_event' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'created_by' => 'nullable|integer',
+            'active' => 'boolean',
         ]);
 
         if ($request->hasFile('file_event')) {
@@ -83,6 +84,7 @@ class EventController extends Controller
             'link_online' => 'nullable|string|max:255',
             'file_event' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'updated_by' => 'nullable|integer',
+            'active' => 'boolean',
         ]);
 
         if ($request->hasFile('file_event')) {

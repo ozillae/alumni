@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Member;
 use App\Models\Photo;
 use App\Models\Video;
+use App\Models\Event; // Add this import for Event model
 
 class GuestController extends Controller
 {
@@ -46,6 +47,22 @@ class GuestController extends Controller
         $video = Video::where('code', $code)->firstOrFail();
         $relatedVideos = Video::where('code', '!=', $code)->take(5)->get(); // Fetch 5 related videos
         return view('guest.video-detail', compact('video', 'relatedVideos'));
+    }
+
+    public function ceremony()
+    {
+        $ceremony = Event::where('active', 1)->paginate(25); // Paginate ceremonies with 25 items per page
+        return view('guest.ceremony', compact('ceremony'));
+    }
+
+    public function ceremonyDetail($id)
+    {
+        $ceremony = Event::where('id', $id)->where('active', 1)->firstOrFail(); // Fetch specific ceremony
+        $relatedEvents = Event::where('id', '!=', $id)
+                              ->where('active', 1)
+                              ->take(5)
+                              ->get(); // Fetch related ceremonies
+        return view('guest.ceremony-detail', compact('ceremony', 'relatedEvents'));
     }
 
 }

@@ -13,10 +13,28 @@ class MemberController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $members = Member::orderBy('id', 'desc')->paginate(10);
-        return view('members.index', compact('members'));
+        $query = Member::query();
+
+        // Apply filters
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+        if ($request->filled('phone')) {
+            $query->where('phone', 'like', '%' . $request->phone . '%');
+        }
+        if ($request->filled('email')) {
+            $query->where('email', 'like', '%' . $request->email . '%');
+        }
+        if ($request->filled('division')) {
+            $query->where('division', $request->division );
+        }
+
+        $members = $query->paginate(10);
+        $divisions = Division::all(); // Fetch all divisions
+
+        return view('members.index', compact('members', 'divisions'));
     }
 
     /**

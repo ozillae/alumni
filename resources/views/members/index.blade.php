@@ -3,6 +3,29 @@
 @section('content')
     <h1 class="text-2xl font-bold mb-4">Members</h1>
     <a href="{{ route('members.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block">Create Member</a>
+
+    <!-- Filter Form -->
+    <form method="GET" action="{{ route('members.index') }}" class="mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <input type="text" name="name" value="{{ request('name') }}" placeholder="Filter by Name" class="border border-gray-300 px-4 py-2 rounded">
+            <input type="text" name="phone" value="{{ request('phone') }}" placeholder="Filter by Phone" class="border border-gray-300 px-4 py-2 rounded">
+            <input type="email" name="email" value="{{ request('email') }}" placeholder="Filter by Email" class="border border-gray-300 px-4 py-2 rounded">
+            <select name="division" class="border border-gray-300 px-4 py-2 rounded">
+                <option value="">Filter by Division</option>
+                @foreach ($divisions as $division)
+                    <option value="{{ $division->id }}" {{ request('division') == $division->id ? 'selected' : '' }}>
+                        {{ $division->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mt-4 text-right">
+            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Filter</button>
+            <a href="{{ route('members.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded">Reset</a>
+        </div>
+    </form>
+    <!-- End Filter Form -->
+
     <table class="table-auto w-full border-collapse border border-gray-300">
         <thead>
             <tr class="bg-gray-200">

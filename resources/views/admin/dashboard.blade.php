@@ -8,8 +8,8 @@
     <div class="bg-white shadow-md rounded-lg p-6">
         <h2 class="text-2xl font-semibold mb-4">Quick Links</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <a href="{{ route('divisions.index') }}" class="block bg-blue-500 text-white text-center py-4 rounded-lg hover:bg-blue-600 transition">
-                Manage Divisions
+            <a href="{{ route('events.index') }}" class="block bg-blue-500 text-white text-center py-4 rounded-lg hover:bg-blue-600 transition">
+                Manage Events
             </a>
             <a href="{{ route('photos.index') }}" class="block bg-blue-500 text-white text-center py-4 rounded-lg hover:bg-blue-600 transition">
                 Manage Photos

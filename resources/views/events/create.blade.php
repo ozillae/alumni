@@ -28,6 +28,10 @@
             <label for="link_online" class="block text-sm font-medium">Online Link</label>
             <input type="text" name="link_online" id="link_online" class="border border-gray-300 rounded w-full px-3 py-2">
         </div>
+        <div class="mb-4 flex flex-row gap-2">
+            <input type="checkbox" name="active" value="1"> <label>Active</label>
+        </div>
+        
         <div class="mb-4">
             <label for="file_event" class="block text-sm font-medium">Event Image</label>
             <input type="file" name="file_event" id="file_event" accept="image/*" class="border border-gray-300 rounded w-full px-3 py-2">

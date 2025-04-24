@@ -19,21 +19,12 @@
     <div class="min-h-screen">
         @include('layouts.navigation-admin')
 
-        <!-- Page Heading -->
-        @if (isset($header))
-        <header class="bg-white dark:bg-gray-100 shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
-            </div>
-        </header>
-        @endif
-
         <!-- Page Content -->
         <div class="container mx-auto p-5 bg-white">
             @yield('content')
         </div>
         
-        <footer class="py-4 mt-10 bg-gray-100">
+        <footer class="py-4 mt-10">
             <!-- Bagian footer -->
             @include('layouts.footer')
         </footer>

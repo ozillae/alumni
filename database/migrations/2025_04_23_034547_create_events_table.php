@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable();
+            $table->boolean('active')->default(0);
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();
             $table->string('location')->nullable();
@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->text('description')->nullable();
         });
     }
 

@@ -40,6 +40,10 @@
             <span class="text-gray-900">{{ $event->location }}</span>
         </p>
         <p class="mb-2">
+            <strong class="text-gray-700 w-32 inline-block">Active:</strong> 
+            <span class="text-gray-900">{{ $event->active == 1 ? 'Active' : 'Nonactive' }}</span>
+        </p>
+        <p class="mb-2">
             <strong class="text-gray-700 w-32 inline-block">Created By:</strong> 
             <span class="text-gray-900">{{ $event->creator ? $event->creator->name : 'N/A' }}</span>
         </p>

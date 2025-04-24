@@ -27,6 +27,8 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/ceremony', [GuestController::class, 'ceremony'])->name('ceremony');
+Route::get('/ceremony-detail/{id}', [GuestController::class, 'ceremonyDetail'])->name('ceremony-detail');
 Route::get('/member', [GuestController::class, 'member'])->name('members');
 Route::get('/member-detail/{code}', [GuestController::class, 'memberDetail'])->name('member-detail');
 Route::get('/photos', [GuestController::class, 'photos'])->name('photos');
