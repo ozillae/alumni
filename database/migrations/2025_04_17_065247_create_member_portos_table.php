@@ -16,12 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('member_id');
             $table->string('title');
             $table->string('institution');
-
-            $table->dateTime('created_at', $precision = 0);
-            $table->dateTime('updated_at', $precision = 0);
+            $table->text('description')->nullable(false);
             $table->integer('created_by');
             $table->integer('updated_by');
-            $table->text('description')->nullable(false);
+            $table->timestamps(); // Automatically adds created_at and updated_at columns
             $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
         });
     }

@@ -10,7 +10,7 @@ class MemberPorto extends Model
     use HasFactory;
 
     protected $fillable = [
-        'member_id', 'title', 'description', 'institution'
+        'member_id', 'title', 'description', 'institution', 'created_by', 'updated_by'
     ];
 
     public function member()

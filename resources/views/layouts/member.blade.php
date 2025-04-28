@@ -18,24 +18,28 @@
         <div class="min-h-screen">
             @include('layouts.navigation-member')
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white dark:bg-gray-100 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
-
             <!-- Page Content -->
-            <div class="container mx-auto px-4 my-6 bg-white">
+            <div class="container mx-auto p-6 mb-6 bg-white">
+                @if (session('success'))
+                    <div class="mb-4 p-4 text-green-800 bg-green-100 border border-green-300 rounded">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="mb-4 p-4 text-red-800 bg-red-100 border border-red-300 rounded">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 @yield('content')
             </div>
         
-            <footer class="py-4 mt-10 bg-gray-100">
+            <footer class="py-4 mt-10">
                 <!-- Bagian footer -->
                 @include('layouts.footer')
             </footer>
         </div>
+        @yield('javascript')
     </body>
 </html>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Province;
 use Illuminate\Http\Request;
 
 class CityController extends Controller
@@ -61,5 +62,22 @@ class CityController extends Controller
     public function destroy(City $city)
     {
         //
+    }
+
+    public function listCity(Request $request)
+    {
+        $result = array();
+        $prov = Province::where('code', $request->get('id'))->first();
+        if($prov != null) {
+            $model = City::where('province', $prov->code)->orderBy('name')->get();
+
+            $result['data'] = $model;
+            $result['status'] = 'OK';
+        } else {
+            $result['data'] = [];
+            $result['status'] = 'Failed';
+        }
+
+        return response()->json($result);
     }
 }

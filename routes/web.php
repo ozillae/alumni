@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\MemberPortoController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
@@ -77,10 +79,23 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('member')->middleware(['auth', 'verified', 'usermember'])->group(function () {
         Route::get('/dashboard', function () {
-            return view('member.dashboard');
+            $user = auth()->user();
+            if ($user->member === null) {
+                return redirect()->route('member.first');
+            }
+            return view('member.dashboard', compact('user'));
         })->name('member.dashboard');
+
+        Route::get('/first', [MembershipController::class, 'first'])->name('member.first');
+        Route::post('/post-member', [MembershipController::class, 'saveMember'])->name('member.postmember');
+        Route::get('/upload-photo', [MembershipController::class, 'formPhoto'])->name('member.uploadPhoto');
+        Route::post('/post-upload-photo', [MembershipController::class, 'uploadPhoto'])->name('member.storePhoto');
+        Route::get('/update-member', [MembershipController::class, 'formUpdateMember'])->name('member.update');
+        Route::post('/pos-update-member', [MembershipController::class, 'UpdateMember'])->name('member.storeUpdate');
+
         Route::resources([
-            'member' => MemberController::class,
+            'membership' => MembershipController::class,
+            'portofolio' => MemberPortoController::class,
         ]);
 
 

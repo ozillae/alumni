@@ -19,4 +19,19 @@ class Member extends Model
     {
         return $this->hasMany(MemberPorto::class);
     }
+
+    public function dataProvince()
+    {
+        return $this->belongsTo('App\Models\Province', 'province', 'code');
+    }
+
+    public function dataCity()
+    {
+        return $this->belongsTo('App\Models\City', 'city', 'id');
+    }
+
+    public function dataDivision()
+    {
+        return $this->belongsTo('App\Models\Division', 'division', 'id');
+    }
 }

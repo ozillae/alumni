@@ -12,23 +12,18 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
-                        {{ __('Tentang Kami') }}
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('photos')" :active="request()->routeIs('photos')">
-                        {{ __('Photo') }}
+                    <x-nav-link :href="route('membership.index')" :active="request()->routeIs('membership.index')">
+                        {{ __('Membership') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('videos')" :active="request()->routeIs('videos')">
-                        {{ __('Video') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('members')" :active="request()->routeIs('members')">
-                        {{ __('Anggota') }}
+                    <x-nav-link :href="route('portofolio.index')" :active="request()->routeIs('portofolio.index')">
+                        {{ __('Porto Folio') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -50,10 +45,13 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            <x-dropdown-link :href="route('dashboard')">
+                                {{ __('Dashboard') }}
+                            </x-dropdown-link>
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profil') }}
                             </x-dropdown-link>
-
+                            
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -89,7 +87,13 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dasbor') }}
+                {{ __('Dasbord') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('membership.index')" :active="request()->routeIs('membership.index')">
+                {{ __('Membership') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('portofolio.index')" :active="request()->routeIs('portofolio.index')">
+                {{ __('Portfolio') }}
             </x-responsive-nav-link>
         </div>
 

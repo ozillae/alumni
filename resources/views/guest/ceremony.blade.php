@@ -1,26 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container p-6">
-    <h1>Ceremony List</h1>
-    <div class="row">
+<div class="container mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-6">Ceremony List</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         @foreach ($ceremony as $event)
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    {{-- Add photo section --}}
-                    <img src="{{ $event->photo_url }}" alt="{{ $event->title }}" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $event->name }}</h5>
-                        <p class="card-text">{{ Str::limit($event->description, 100) }}</p>
-                        <a href="{{ route('ceremony-detail', $event->id) }}" class="btn btn-primary">View Details</a>
-                    </div>
+            <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                {{-- Add photo section --}}
+                <img src="{{ $event->photo_url }}" alt="{{ $event->title }}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h5 class="text-lg font-semibold mb-2">{{ $event->name }}</h5>
+                    <p class="text-gray-600 text-sm mb-4">{{ Str::limit($event->description, 100) }}</p>
+                    <a href="{{ route('ceremony-detail', $event->id) }}" class="inline-block bg-blue-500 text-white text-sm font-medium py-2 px-4 rounded hover:bg-blue-600">View Details</a>
                 </div>
             </div>
         @endforeach
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="mt-6 flex justify-center">
         {{-- Add pagination links --}}
-        {{ $ceremony->links() }}
+        {{ $ceremony->links('pagination::tailwind') }}
     </div>
 </div>
 @endsection
