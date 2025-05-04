@@ -8,7 +8,7 @@
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="aspect-w-16 aspect-h-9">
                 <a href="{{ url('/video-detail/' . $video->code) }}">
-                    <img class="w-full h-full" src="{{ asset('images/video.jpg') }}">
+                    <img class="w-full h-full" src="{{ asset('images/video.jpg') }}" loading="lazy">
                 </a>
             </div>
             <div class="p-4">

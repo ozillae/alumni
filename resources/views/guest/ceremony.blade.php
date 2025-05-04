@@ -7,7 +7,7 @@
         @foreach ($ceremony as $event)
             <div class="bg-white shadow-md rounded-lg overflow-hidden">
                 {{-- Add photo section --}}
-                <img src="{{ asset('event-files/'.$event->file_event) }}" alt="{{ $event->title }}" class="w-full h-48 object-cover">
+                <img src="{{ asset('event-files/'.$event->file_event) }}" loading="lazy" alt="{{ $event->title }}" class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h5 class="text-lg font-semibold mb-2">{{ $event->name }}</h5>
                     <p class="text-gray-600 text-sm mb-4">{{ Str::limit($event->description, 100) }}</p>

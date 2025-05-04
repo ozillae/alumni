@@ -7,7 +7,7 @@
                 <a href="#" class="text-gray-400 hover:text-white">Contact Us</a>
             </div>
             <div>
-                <p class="text-sm">&copy; {{ date('Y') }} {{ config('app.name', 'Alumni') }}. All rights reserved.</p>
+                <p class="text-sm">&copy; {{ date('Y') }} {{ config('app.name', 'Purwo Sejati') }}. All rights reserved.</p>
             </div>
             
         </div>

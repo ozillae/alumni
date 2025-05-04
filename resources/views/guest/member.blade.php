@@ -33,9 +33,9 @@
         @forelse ($members as $member)
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             @if(file_exists('member-files/'.$member->file_profil))
-            <img src="{{ asset('member-files/'.$member->file_profil) }}"  alt="{{ $member->name }}" class="w-full h-48 object-cover">
+            <img src="{{ asset('member-files/'.$member->file_profil) }}" loading="lazy"  alt="{{ $member->name }}" class="w-full h-48 object-cover">
             @else
-            <img src="{{ asset('profil/woman.png') }}" alt="{{ $member->name }}" class="w-full h-48 object-cover">
+            <img src="{{ asset('profil/woman.png') }}" loading="lazy" alt="{{ $member->name }}" class="w-full h-48 object-cover">
             @endif
             <div class="p-4">
                 <h5 class="text-lg font-semibold">{{ $member->name }}</h5>

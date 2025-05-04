@@ -21,48 +21,57 @@ class GuestController extends Controller
             $query->where('division', $request->division );
         }
 
-        $members = $query->paginate(8); 
+        $members = $query->paginate(12); 
         $divisions = Division::where('active', 1)->orderBy('name')->get();
-        return view('guest.member', compact('members', 'divisions'));
+        $title = 'Daftar Anggota';
+
+        return view('guest.member', compact('members', 'divisions', 'title'));
     }
 
     public function memberDetail($code)
     {
         $member = Member::where('code', $code)->firstOrFail();
         $member_portos = $member->portfolios()->get(); // Fetch related portfolios
-        return view('guest.member-detail', ['member' => $member, 'member_portos' => $member_portos]);
+
+        return view('guest.member-detail', ['member' => $member, 'member_portos' => $member_portos, 'title' => $member->name]);
     }
 
     public function photos(Request $request)
     {
-        $photos = Photo::orderBy('id', 'desc')->paginate(8); 
-        return view('guest.photo', ['photos' => $photos]);
+        $photos = Photo::orderBy('id', 'desc')->paginate(12); 
+        return view('guest.photo', ['photos' => $photos, 'title' => 'Daftar Foto']);
     }
 
     public function photoDetail($code)
     {
         $photo = Photo::where('code', $code)->firstOrFail();
         $relatedPhotos = Photo::where('code', '!=', $code)->inRandomOrder()->take(5)->get(); // Fetch 5 related photos
-        return view('guest.photo-detail', compact('photo', 'relatedPhotos'));
+        $title = $photo->name;
+
+        return view('guest.photo-detail', compact('photo', 'relatedPhotos', 'title'));
     }
 
     public function videos(Request $request)
     {
-        $videos = Video::orderBy('id', 'desc')->paginate(8); 
-        return view('guest.video', ['videos' => $videos]);
+        $videos = Video::orderBy('id', 'desc')->paginate(12); 
+        return view('guest.video', ['videos' => $videos, 'title' => 'Daftar Video']);
     }
 
     public function videoDetail($code)
     {
         $video = Video::where('code', $code)->firstOrFail();
         $relatedVideos = Video::where('code', '!=', $code)->inRandomOrder()->take(5)->get(); // Fetch 5 related videos
-        return view('guest.video-detail', compact('video', 'relatedVideos'));
+        $title = $video->name;
+
+        return view('guest.video-detail', compact('video', 'relatedVideos', 'title'));
     }
 
     public function ceremony()
     {
-        $ceremony = Event::orderBy('id', 'desc')->where('active', 1)->paginate(25); // Paginate ceremonies with 25 items per page
-        return view('guest.ceremony', compact('ceremony'));
+        $ceremony = Event::orderBy('id', 'desc')->where('active', 1)->paginate(12); 
+        $title = 'Daftar Kegiatan';
+
+        return view('guest.ceremony', compact('ceremony', 'title'));
     }
 
     public function ceremonyDetail($id)
@@ -73,7 +82,9 @@ class GuestController extends Controller
                               ->inRandomOrder()
                               ->take(5)
                               ->get(); // Fetch related ceremonies
-        return view('guest.ceremony-detail', compact('ceremony', 'relatedEvents'));
+        $title = $ceremony->name;
+
+        return view('guest.ceremony-detail', compact('ceremony', 'relatedEvents', 'title'));
     }
 
 }

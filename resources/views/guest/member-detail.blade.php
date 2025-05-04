@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mx-auto py-10">
-    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden py-10">
         <div class="md:flex">
             <div class="md:w-1/3 p-6">
                 @if(file_exists('member-files/'.$member->file_profil))

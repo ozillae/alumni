@@ -23,7 +23,7 @@
                 <div class="flex items-start space-x-4">
                     <div class="w-32 h-20 bg-gray-200 rounded-lg overflow-hidden">
                         <a href="{{ url('/photo-detail/' . $relatedPhoto->code) }}">
-                            <img src="{{ asset('photo-files/' . $relatedPhoto->file_path) }}" alt="{{ $relatedPhoto->name }}" class="w-full h-full object-cover">
+                            <img src="{{ asset('photo-files/' . $relatedPhoto->file_path) }}" loading="lazy" alt="{{ $relatedPhoto->name }}" class="w-full h-full object-cover">
                         </a>
                     </div>
                     <div>

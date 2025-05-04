@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-orange-200 via-pink-200 to-purple-300">
-    <div class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+<div class="min-h-screen  items-center justify-center bg-gradient-to-b from-orange-200 via-pink-200 to-purple-300">
+    <div class="w-full max-w-md bg-white rounded-lg shadow-md p-6 mx-auto mt-10">
         <h2 class="text-2xl font-bold text-center text-gray-800">Daftar</h2>
         <p class="mt-2 text-sm text-center text-gray-600">
             Sudah punya akun? <a href="{{ route('login') }}" class="text-blue-500 hover:underline">Masuk</a>
