@@ -56,6 +56,7 @@ class MembershipController extends Controller
         $model->name = $request->get('name');
         $model->email = $request->get('email');
         $model->phone = $request->get('phone');
+        $model->publish_phone = empty($request->get('publish_phone')) ? 0 : $request->get('publish_phone');
         
         $model->division = $request->get('division');
         $model->province = $request->get('province');
@@ -164,7 +165,8 @@ class MembershipController extends Controller
         $model->name = $request->get('name');
         $model->email = $request->get('email');
         $model->phone = $request->get('phone');
-        
+        $model->publish_phone = empty($request->get('publish_phone')) ? 0 : $request->get('publish_phone');
+
         $model->division = $request->get('division');
         $model->province = $request->get('province');
         $model->city = $request->get('city');

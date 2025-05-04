@@ -20,6 +20,10 @@
                 <input type="text" name="phone" id="phone" class="mt-1 block w-full border-gray-300 rounded-md" value="{{ $user->phone }}" required>
             </div>
             <div class="mb-4">
+                <label for="phone" class="block text-sm font-medium text-gray-700">Tampilkan No Telepon</label>
+                <input type="checkbox" name="publish_phone" id="publish_phone" value="1"> Tampilkan
+            </div>
+            <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <input type="email" name="email" id="email" class="mt-1 block w-full border-gray-300 rounded-md" value="{{ $user->email }}" required>
             </div>

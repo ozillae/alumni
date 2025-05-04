@@ -14,13 +14,15 @@
             <div class="md:w-2/3 px-6">
                 <h2 class="text-2xl font-bold mb-4">{{ $member->title_front }} {{ $member->name }}{{ $member->title_back != null ? ', ' : '' }} {{ $member->title_back }}</h2>
                 <p class="text-gray-700 mb-2"><strong>Email:</strong> {{ $member->email }}</p>
+                @if($member->publish_phone == true)
+                    <p class="text-gray-700 mb-2"><strong>Telepon:</strong> {{ displayPhoneNumber($member->phone) }}</p>
+                @endif
                 <p class="text-gray-700 mb-2"><strong>Alamat:</strong> {{ $member->address }}</p>
-                <p class="text-gray-700 mb-2"><strong>Telepon:</strong> {{ displayPhoneNumber($member->phone) }}</p>
                 <p class="text-gray-700 mb-2"><strong>Provinsi:</strong> {{ $member->dataProvince->name }}</p>
                 <p class="text-gray-700 mb-2"><strong>Kota:</strong> {{ $member->dataCity->name }}</p>
                 <p class="text-gray-700 mb-2"><strong>Bidang:</strong> {{ $member->dataDivision->name }}</p>
                 <p class="text-gray-700 mb-2"><strong>Tanggal Bergabung:</strong> {{ displayDate($member->joint_date) }}</p>
-                <p class="text-gray-700 mb-4"><strong>Deskripsi:</strong> {{ $member->description }}</p>                    
+                <p class="text-gray-700 mb-4"><strong>Deskripsi:</strong> {!! nl2br($member->description) !!}</p>                    
             </div>
         </div>
         <div class="px-6">

@@ -11,7 +11,7 @@
     <div class="">
         <p class="text-gray-600 mb-2"><strong>Waktu:</strong> {{ displayDateTimeDay($ceremony->start_date) }}</p>
         <p class="text-gray-600 mb-6"><strong>Tempat:</strong> {{ $ceremony->location }}</p>
-        {{ nl2br($ceremony->description) }}
+        {!! nl2br($ceremony->description) !!}
     </div>
 
     <h3 class="text-xl font-semibold mb-4 mt-6">Related Events</h3>

@@ -18,44 +18,47 @@
         @endif
         <a href="{{ route('member.uploadPhoto', 'code='.$member->code) }}" 
            class="absolute inset-0 bg-black bg-opacity-50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-            Upload Photo
+            Upload Foto
         </a>
     </div>
     <div>
         <div class="mb-4 flex">
-            <strong class="w-32">Code:</strong> {{ $member->code }}
+            <strong class="w-40">Kode:</strong> {{ $member->code }}
         </div>
         @foreach (['Nama' => 'name', 'Gelar Depan' => 'title_front', 'Gelar Belakang' => 'title_back', 'Email' => 'email'] as $label => $field)
         <div class="mb-4 flex">
-            <strong class="w-32">{{ $label }}:</strong> {{ $member->$field ?? '-' }}
+            <strong class="w-40">{{ $label }}:</strong> {{ $member->$field ?? '-' }}
         </div>
         @endforeach
         <div class="mb-4 flex">
-            <strong class="w-32">Telepon:</strong> {{ displayPhoneNumber($member->phone) ?? '-' }}
+            <strong class="w-40">Telepon:</strong> {{ displayPhoneNumber($member->phone) ?? '-' }}
+        </div>
+        <div class="mb-4 flex">
+            <strong class="w-40">Tampilkan Telepon:</strong> {{ ($member->publish_phone) ? 'Tampilkan' : 'Tidak Tampilkan' }}
         </div>
     </div>
 </div>
 <div>
-    @foreach (['Address' => 'address', 'City' => 'dataCity.name', 'Province' => 'dataProvince.name', 'Division' => 'dataDivision.name'] as $label => $field)
+    @foreach (['Alamat' => 'address', 'Kota' => 'dataCity.name', 'Provinsi' => 'dataProvince.name', 'Divisi' => 'dataDivision.name'] as $label => $field)
     <div class="mb-4 flex">
-        <strong class="w-32">{{ $label }}:</strong> {{ data_get($member, $field, '-') }}
+        <strong class="w-40">{{ $label }}:</strong> {{ data_get($member, $field, '-') }}
     </div>
     @endforeach
     <div class="mb-4 flex">
-        <strong class="w-32">Status:</strong>
+        <strong class="w-40">Status:</strong>
         @switch($member->status)
-        @case(1) Active @break
-        @case(2) Inactive @break
-        @case(3) Suspended @break
-        @case(4) Terminated @break
-        @default Unknown
+        @case(1) Aktif @break
+        @case(2) Tidak Aktif @break
+        @case(3) Ditangguhkan @break
+        @case(4) Dihentikan @break
+        @default Tidak Diketahui
         @endswitch
     </div>
     <div class="mb-4 flex">
-        <strong class="w-32">Joint Date:</strong> {{ $member->joint_date }}
+        <strong class="w-40">Tanggal Bergabung:</strong> {{ displayDate($member->joint_date) }}
     </div>
     <div class="mb-4 flex">
-        <strong class="w-32">Description:</strong> {{ $member->description ?? '-' }}
+        <strong class="w-40">Deskripsi:</strong> {{ $member->description ?? '-' }}
     </div>
 </div>
 
@@ -86,6 +89,6 @@
     @endif
 </div> -->
 <div>
-    <a href="{{ route('member.update') }}" class="mt-6 inline-block bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Update Member</a>
+    <a href="{{ route('member.update') }}" class="mt-6 inline-block bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Perbarui Anggota</a>
 </div>
 @endsection

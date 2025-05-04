@@ -29,7 +29,7 @@ return new class extends Migration
             $table->foreign('city')->references('id')->on('cities');
             $table->foreign('division')->references('id')->on('divisions');
             
-
+            $table->boolean('publish_phone')->default(false);
             $table->enum('status', [1,2,3,4])->default(1);
             $table->date('joint_date');
             $table->softDeletes($column = 'deleted_at', $precision = 0);
