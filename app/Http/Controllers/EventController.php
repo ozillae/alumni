@@ -38,13 +38,24 @@ class EventController extends Controller
             'end_date' => 'nullable|date',
             'location' => 'nullable|string|max:255',
             'link_online' => 'nullable|string|max:255',
-            'file_event' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'file_event' => 'nullable|file|mimes:jpeg,png,jpg,gif|max:2048',
             'created_by' => 'nullable|integer',
             'active' => 'boolean',
         ]);
 
+        // if ($request->hasFile('file_event')) {
+        //     $validated['file_event'] = $request->file('file_event')->store('event_images', 'public');
+        // }
+
+        $path = null;
         if ($request->hasFile('file_event')) {
-            $validated['file_event'] = $request->file('file_event')->store('event_images', 'public');
+            $ext = $request->file_event->getClientOriginalExtension();
+
+            if(in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'gif'])){
+                $path = 'event-'.time().'.' . $ext;
+                $request->file_event->move(public_path('event-files'), $path);
+                $validated['file_event'] = $path;
+            }
         }
 
         $validated['created_by'] = Auth::id(); // Set the authenticated user as the creator
@@ -88,10 +99,18 @@ class EventController extends Controller
         ]);
 
         if ($request->hasFile('file_event')) {
-            if ($event->file_event) {
-                Storage::disk('public')->delete($event->file_event);
+            $ext = $request->file_event->getClientOriginalExtension();
+
+            if(in_array(strtolower($ext), ['jpg', 'jpeg', 'png'])){
+                if(file_exists(public_path('event-files/'.$event->file_event))) {
+                    unlink(public_path('event-files/'.$event->file_event));
+                }
+
+                $image = 'event-'.time().'.' . $ext;
+                $request->file_event->move(public_path('event-files'), $image);
+
+                $validated['file_event'] = $image;
             }
-            $validated['file_event'] = $request->file('file_event')->store('event_images', 'public');
         }
 
         $validated['updated_by'] = Auth::id(); // Update the updater field

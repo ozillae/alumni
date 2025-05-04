@@ -28,7 +28,16 @@ class PhotoController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        $path = $request->file('file_path')->store('photos', 'public');
+        $path = null; // $request->file('file_path')->store('photos', 'public');
+        if ($request->hasFile('file_path')) {
+            $ext = $request->file_path->getClientOriginalExtension();
+
+            if(in_array(strtolower($ext), ['jpg', 'jpeg', 'png'])){
+                $path = 'photos-'.$request->get('code').'-'.time().'.' . $ext;
+                $request->file_path->move(public_path('photo-files'), $path);
+            }
+        }
+
         Photo::create([
             'code' => $request->code,
             'name' => $request->name,
@@ -66,7 +75,18 @@ class PhotoController extends Controller
         $data['updated_by'] = auth()->id();
 
         if ($request->hasFile('file_path')) {
-            $data['file_path'] = $request->file('file_path')->store('photos', 'public');
+            $ext = $request->file_path->getClientOriginalExtension();
+
+            if(in_array(strtolower($ext), ['jpg', 'jpeg', 'png'])){
+                if(file_exists(public_path('photo-files/'.$photo->file_path))) {
+                    unlink(public_path('photo-files/'.$photo->file_path));
+                }
+
+                $image = 'photos-'.$data['code'].'-'.time().'.' . $ext;
+                $request->file_path->move(public_path('photo-files'), $image);
+
+                $data['file_path'] = $image;
+            }
         }
 
         $photo->update($data);

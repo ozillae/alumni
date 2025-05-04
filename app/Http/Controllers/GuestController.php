@@ -12,7 +12,7 @@ class GuestController extends Controller
 {
     public function member(Request $request)
     {
-        $members = Member::paginate(8); 
+        $members = Member::orderBy('id', 'desc')->paginate(8); 
         return view('guest.member', ['members' => $members]);
     }
 
@@ -25,33 +25,33 @@ class GuestController extends Controller
 
     public function photos(Request $request)
     {
-        $photos = Photo::paginate(8); 
+        $photos = Photo::orderBy('id', 'desc')->paginate(8); 
         return view('guest.photo', ['photos' => $photos]);
     }
 
     public function photoDetail($code)
     {
         $photo = Photo::where('code', $code)->firstOrFail();
-        $relatedPhotos = Photo::where('code', '!=', $code)->take(5)->get(); // Fetch 5 related photos
+        $relatedPhotos = Photo::where('code', '!=', $code)->inRandomOrder()->take(5)->get(); // Fetch 5 related photos
         return view('guest.photo-detail', compact('photo', 'relatedPhotos'));
     }
 
     public function videos(Request $request)
     {
-        $videos = Video::paginate(8); 
+        $videos = Video::orderBy('id', 'desc')->paginate(8); 
         return view('guest.video', ['videos' => $videos]);
     }
 
     public function videoDetail($code)
     {
         $video = Video::where('code', $code)->firstOrFail();
-        $relatedVideos = Video::where('code', '!=', $code)->take(5)->get(); // Fetch 5 related videos
+        $relatedVideos = Video::where('code', '!=', $code)->inRandomOrder()->take(5)->get(); // Fetch 5 related videos
         return view('guest.video-detail', compact('video', 'relatedVideos'));
     }
 
     public function ceremony()
     {
-        $ceremony = Event::where('active', 1)->paginate(25); // Paginate ceremonies with 25 items per page
+        $ceremony = Event::orderBy('id', 'desc')->where('active', 1)->paginate(25); // Paginate ceremonies with 25 items per page
         return view('guest.ceremony', compact('ceremony'));
     }
 
@@ -60,6 +60,7 @@ class GuestController extends Controller
         $ceremony = Event::where('id', $id)->where('active', 1)->firstOrFail(); // Fetch specific ceremony
         $relatedEvents = Event::where('id', '!=', $id)
                               ->where('active', 1)
+                              ->inRandomOrder()
                               ->take(5)
                               ->get(); // Fetch related ceremonies
         return view('guest.ceremony-detail', compact('ceremony', 'relatedEvents'));

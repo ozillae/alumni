@@ -96,15 +96,15 @@ class MembershipController extends Controller
 
             $ext = $request->file_profil->getClientOriginalExtension();
 
-            if(in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'pdf'])){
+            if(in_array(strtolower($ext), ['jpg', 'jpeg', 'png'])){
 
                 $image = 'profile-'.$member->code.'-pp-'.time().'.' . $ext;
                 $request->file_profil->move(public_path('member-files'), $image);
 
 
             // Delete the old profile photo if it exists
-                if(file_exists(asset('member-files/'.$member->file_profil))) {
-                    
+                if(file_exists(public_path('member-files/'.$member->file_profil))) {
+                    unlink(public_path('member-files/'.$member->file_profil));
                 }
 
                 $member->file_profil = $image;

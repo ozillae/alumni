@@ -30,7 +30,7 @@
         <p class="mb-2">
             <strong class="text-gray-700 w-32 inline-block">File:</strong> 
             @if($event->file_event)
-                <a href="{{ asset('storage/' . $event->file_event) }}" class="text-blue-500 hover:underline" target="_blank">Download</a>
+                <img src="{{ asset('event-files/' . $event->file_event) }}" class="w-96" />
             @else
                 <span class="text-gray-900">N/A</span>
             @endif

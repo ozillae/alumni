@@ -9,14 +9,17 @@
 
     {{-- Add photo section --}}
     <div class="mb-6">
-        <img src="{{ $ceremony->photo_url }}" alt="{{ $ceremony->title }}" class="w-full h-auto rounded-lg shadow-md">
+        <img src="{{ asset('event-files/'.$ceremony->file_event) }}" alt="{{ $ceremony->name }}" class="w-full h-auto rounded-lg shadow-md">
+    </div>
+    <div class="">
+        {{ nl2br($ceremony->description) }}
     </div>
 
-    <h3 class="text-xl font-semibold mb-4">Related Events</h3>
+    <h3 class="text-xl font-semibold mb-4 mt-6">Related Events</h3>
     <ul class="space-y-4">
         @foreach($relatedEvents as $event)
             <li class="border-b pb-4">
-                <a href="{{ route('guest.ceremony', ['id' => $event->id]) }}" class="text-blue-500 hover:underline font-medium">{{ $event->title }}</a>
+                <a href="{{ route('ceremony-detail', ['id' => $event->id]) }}" class="text-blue-500 hover:underline font-medium">{{ $event->name }}</a>
                 <p class="text-gray-600 text-sm">{{ Str::limit($event->description, 100) }}</p>
             </li>
         @endforeach

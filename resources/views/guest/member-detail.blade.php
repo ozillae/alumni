@@ -12,7 +12,7 @@
                 @endif
             </div>
             <div class="md:w-2/3 px-6">
-                <h2 class="text-2xl font-bold mb-4">{{ $member->title_front }} {{ $member->name }} {{ $member->title_back }}</h2>
+                <h2 class="text-2xl font-bold mb-4">{{ $member->title_front }} {{ $member->name }}{{ $member->title_back != null ? ', ' : '' }} {{ $member->title_back }}</h2>
                 <p class="text-gray-700 mb-2"><strong>Email:</strong> {{ $member->email }}</p>
                 <p class="text-gray-700 mb-2"><strong>Alamat:</strong> {{ $member->address }}</p>
                 <p class="text-gray-700 mb-2"><strong>Telepon:</strong> {{ displayPhoneNumber($member->phone) }}</p>

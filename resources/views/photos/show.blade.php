@@ -21,7 +21,7 @@
         </p>
         <p class="mb-2">
             <strong class="text-gray-700 w-32 inline-block">Image:</strong> 
-            <img src="{{ asset('storage/' . $photo->file_path) }}" 
+            <img src="{{ asset('photo-files/' . $photo->file_path) }}" 
                  alt="{{ $photo->name }}" 
                  class="w-40 h-40 object-cover border border-gray-300 rounded">
         </p>
