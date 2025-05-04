@@ -12,6 +12,10 @@
             <span class="text-gray-900">{{ $video->name }}</span>
         </p>
         <p class="mb-2">
+            <strong class="text-gray-700 w-32 inline-block">Description:</strong> 
+            <span class="text-gray-900">{{ $video->description }}</span>
+        </p>
+        <p class="mb-2">
             <strong class="text-gray-700 w-32 inline-block">Publish:</strong> 
             <span class="text-gray-900">{{ $video->publish ? 'Yes' : 'No' }}</span>
         </p>

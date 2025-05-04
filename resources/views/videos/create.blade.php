@@ -20,6 +20,10 @@
             <input type="url" name="url" id="url" value="{{ old('url', $video->url ?? '') }}" class="w-full border-gray-300 rounded">
         </div>
         <div class="mb-4">
+            <label for="description" class="block text-gray-700">Description</label>
+            <textarea name="description" id="description" rows="4" class="w-full border-gray-300 rounded">{{ old('description', $video->description ?? '') }}</textarea>
+        </div>
+        <div class="mb-4">
             <label for="publish" class="block text-gray-700">Publish</label>
             <select name="publish" id="publish" class="w-full border-gray-300 rounded">
                 <option value="1" {{ old('publish', $video->publish ?? '') == 1 ? 'selected' : '' }}>Yes</option>

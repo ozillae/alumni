@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Division;
 use App\Models\Member;
 use App\Models\Photo;
 use App\Models\Video;
@@ -12,8 +13,17 @@ class GuestController extends Controller
 {
     public function member(Request $request)
     {
-        $members = Member::orderBy('id', 'desc')->paginate(8); 
-        return view('guest.member', ['members' => $members]);
+        $query = Member::orderBy('id', 'desc');
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+        if ($request->filled('division')) {
+            $query->where('division', $request->division );
+        }
+
+        $members = $query->paginate(8); 
+        $divisions = Division::where('active', 1)->orderBy('name')->get();
+        return view('guest.member', compact('members', 'divisions'));
     }
 
     public function memberDetail($code)

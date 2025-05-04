@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="px-6">
-            <h2 class="text-xl font-bold">Portfolios</h2>
+            <h2 class="text-xl font-bold">Porto Folio</h2>
             <ul class="list-disc pl-5">
                 @forelse($member_portos as $porto)
                 <li>
@@ -32,7 +32,7 @@
                     <p>{{ $porto->description }}</p>
                 </li>
                 @empty
-                <li>No portfolios available.</li>
+                <li>Tidak ada porto folio yang ditampilkan.</li>
                 @endforelse
             </ul>
         </div>

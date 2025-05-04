@@ -33,6 +33,7 @@ class VideoController extends Controller
             'code' => 'required|unique:videos',
             'name' => 'required',
             'url' => 'required|url',
+            'description' => 'nullable|string',
         ]);
 
         Video::create(array_merge($request->all(), [
@@ -68,6 +69,7 @@ class VideoController extends Controller
             'code' => 'required|unique:videos,code,' . $video->id,
             'name' => 'required',
             'url' => 'required|url',
+            'description' => 'nullable|string',
         ]);
 
         $video->update(array_merge($request->all(), [

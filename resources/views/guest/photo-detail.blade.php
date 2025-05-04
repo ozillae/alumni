@@ -22,7 +22,9 @@
                 @forelse ($relatedPhotos as $relatedPhoto)
                 <div class="flex items-start space-x-4">
                     <div class="w-32 h-20 bg-gray-200 rounded-lg overflow-hidden">
-                        <img src="{{ asset('photo-files/' . $relatedPhoto->file_path) }}" alt="{{ $relatedPhoto->name }}" class="w-full h-full object-cover">
+                        <a href="{{ url('/photo-detail/' . $relatedPhoto->code) }}">
+                            <img src="{{ asset('photo-files/' . $relatedPhoto->file_path) }}" alt="{{ $relatedPhoto->name }}" class="w-full h-full object-cover">
+                        </a>
                     </div>
                     <div>
                         <a href="{{ url('/photo-detail/' . $relatedPhoto->code) }}" class="text-lg font-semibold text-gray-800 hover:underline">

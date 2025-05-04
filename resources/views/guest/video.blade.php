@@ -7,12 +7,14 @@
         @forelse ($videos as $video)
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="aspect-w-16 aspect-h-9">
-                <iframe class="w-full h-full" src="{{ $video->url }}" frameborder="0" allowfullscreen></iframe>
+                <a href="{{ url('/video-detail/' . $video->code) }}">
+                    <img class="w-full h-full" src="{{ asset('images/video.jpg') }}">
+                </a>
             </div>
             <div class="p-4">
-                <h5 class="text-lg font-semibold">{{ $video->name }}</h5>
-                <p class="text-sm text-gray-600 mt-2">{{ $video->description }}</p>
-                <a href="{{ url('/video-detail/' . $video->code) }}" class="mt-2 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">View Details</a>
+                <h5 class="text-lg font-semibold">
+                    <a href="{{ url('/video-detail/' . $video->code) }}">{{ $video->name }}</a>
+                </h5>
             </div>
         </div>
         @empty

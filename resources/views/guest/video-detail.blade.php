@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto px-4">
+<div class="container mx-auto px-4 mt-6">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Main Video Section -->
         <div class="lg:col-span-2">
@@ -11,9 +11,6 @@
             <div class="mt-4">
                 <h1 class="text-2xl font-bold text-gray-800">{{ $video->name }}</h1>
                 <p class="text-sm text-gray-600 mt-2">{{ $video->description }}</p>
-                <p class="text-sm text-gray-600 mt-2">
-                    <strong>Published:</strong> {{ $video->publish ? 'Yes' : 'No' }}
-                </p>
             </div>
         </div>
 
@@ -24,7 +21,9 @@
                 @forelse ($relatedVideos as $relatedVideo)
                 <div class="flex items-start space-x-4">
                     <div class="w-32 h-20 bg-black rounded-lg overflow-hidden">
-                        <iframe class="w-full h-full" src="{{ $relatedVideo->url }}" frameborder="0" allowfullscreen></iframe>
+                        <a href="{{ url('/video-detail/' . $relatedVideo->code) }}">
+                            <img class="w-full h-full" src="{{ asset('images/video.jpg') }}">
+                        </a>
                     </div>
                     <div>
                         <a href="{{ url('/video-detail/' . $relatedVideo->code) }}" class="text-lg font-semibold text-gray-800 hover:underline">
