@@ -21,7 +21,7 @@ class GuestController extends Controller
             $query->where('division', $request->division );
         }
 
-        $members = $query->paginate(12); 
+        $members = $query->where('status', '3')->orderBy('name')->paginate(12); 
         $divisions = Division::where('active', 1)->orderBy('name')->get();
         $title = 'Daftar Anggota';
 

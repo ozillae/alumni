@@ -59,6 +59,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
         })->name('admin.dashboard');
+
+        Route::post('/members-approve', [MemberController::class, 'approve'])->name('members.approve');
+        Route::post('/members-reject', [MemberController::class, 'reject'])->name('members.reject');
+
         Route::resources([
             'events' => EventController::class,
             'divisions' => DivisionController::class,
@@ -66,8 +70,6 @@ Route::middleware('auth')->group(function () {
             'videos' => VideoController::class,
             'members' => MemberController::class,
         ]);
-
-
     });
 
     Route::prefix('admin2')->middleware(['auth', 'verified', 'useradmin'])->group(function () {

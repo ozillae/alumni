@@ -59,8 +59,14 @@
             </select>
         </div>
         <div class="mb-4">
-            <label for="joint_date" class="block text-sm font-medium text-gray-700">Joint Date</label>
-            <input type="date" name="joint_date" id="joint_date" value="{{ $member->joint_date }}" class="mt-1 block w-full border-gray-300 rounded-md" required>
+            <label for="joint_date" class="block text-sm font-medium text-gray-700">Status</label>
+            <select name="status" class="border border-gray-300 px-4 py-2 rounded">
+                @foreach ($listStatus as $k => $v)
+                    <option value="{{ $k }}" {{ $member->status == $k ? 'selected' : '' }}>
+                        {{ $v }}
+                    </option>
+                @endforeach
+            </select>
         </div>
         <div class="mb-4">
             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>

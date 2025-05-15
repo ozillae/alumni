@@ -21,6 +21,18 @@
 
         <!-- Page Content -->
         <div class="container mx-auto p-5 bg-white">
+            @if (session('success'))
+            <div class="mb-4 p-4 text-green-800 bg-green-100 border border-green-300 rounded">
+                {{ session('success') }}
+            </div>
+            @endif
+
+            @if (session('error'))
+            <div class="mb-4 p-4 text-red-800 bg-red-100 border border-red-300 rounded">
+                {{ session('error') }}
+            </div>
+            @endif
+            
             @yield('content')
         </div>
         

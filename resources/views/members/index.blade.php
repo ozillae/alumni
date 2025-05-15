@@ -6,7 +6,7 @@
 
     <!-- Filter Form -->
     <form method="GET" action="{{ route('members.index') }}" class="mb-4">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <input type="text" name="name" value="{{ request('name') }}" placeholder="Filter by Name" class="border border-gray-300 px-4 py-2 rounded">
             <input type="text" name="phone" value="{{ request('phone') }}" placeholder="Filter by Phone" class="border border-gray-300 px-4 py-2 rounded">
             <input type="email" name="email" value="{{ request('email') }}" placeholder="Filter by Email" class="border border-gray-300 px-4 py-2 rounded">
@@ -15,6 +15,15 @@
                 @foreach ($divisions as $division)
                     <option value="{{ $division->id }}" {{ request('division') == $division->id ? 'selected' : '' }}>
                         {{ $division->name }}
+                    </option>
+                @endforeach
+            </select>
+
+            <select name="status" class="border border-gray-300 px-4 py-2 rounded">
+                <option value="">Filter by Status</option>
+                @foreach ($listStatus as $k => $v)
+                    <option value="{{ $k }}" {{ request('status') == $k ? 'selected' : '' }}>
+                        {{ $v }}
                     </option>
                 @endforeach
             </select>
@@ -34,7 +43,7 @@
                 <th class="border border-gray-300 px-4 py-2">Name</th>
                 <th class="border border-gray-300 px-4 py-2">Phone</th>
                 <th class="border border-gray-300 px-4 py-2">Email</th>
-                <th class="border border-gray-300 px-4 py-2">Joint Date</th>
+                <th class="border border-gray-300 px-4 py-2">Status</th>
                 <th class="border border-gray-300 px-4 py-2">Actions</th>
             </tr>
         </thead>
@@ -46,7 +55,7 @@
                     <td class="border border-gray-300 px-4 py-2">{{ $member->name }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $member->phone }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $member->email }}</td>
-                    <td class="border border-gray-300 px-4 py-2">{{ $member->joint_date }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ $member->textStatus($member->status) }}</td>
                     <td class="border border-gray-300 px-4 py-2">
                         <a href="{{ route('members.show', $member) }}" class="bg-blue-500 text-white px-2 py-1 rounded">View</a>
                         <a href="{{ route('members.edit', $member) }}" class="bg-yellow-500 text-white px-2 py-1 rounded">Edit</a>

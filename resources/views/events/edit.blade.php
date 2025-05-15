@@ -38,7 +38,7 @@
             @if($event->file_event)
                 <p class="mt-2 text-sm text-gray-600">
                     Current Image: 
-                    <a href="{{ asset('storage/' . $event->file_event) }}" class="text-blue-500 hover:underline" target="_blank">View</a>
+                    <a href="{{ asset('event-files/' . $event->file_event) }}" class="text-blue-500 hover:underline" target="_blank">View</a>
                 </p>
             @endif
         </div>

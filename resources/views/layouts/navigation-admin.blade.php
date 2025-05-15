@@ -18,7 +18,7 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('events.index')" :active="request()->routeIs('event')">
-                        {{ __('Kegiatan') }}
+                        {{ __('Event') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -33,12 +33,12 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('members.index')" :active="request()->routeIs('members')">
-                        {{ __('Anggota') }}
+                        {{ __('Member') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('divisions.index')" :active="request()->routeIs('divisions')">
-                        {{ __('Divisi') }}
+                        {{ __('Division') }}
                     </x-nav-link>
                 </div>
                 

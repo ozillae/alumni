@@ -22,7 +22,7 @@
                     <td class="border border-gray-300 px-4 py-2">{{ $photo->name }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $photo->publish ? 'Yes' : 'No' }}</td>
                     <td class="border border-gray-300 px-4 py-2">
-                        <img src="{{ asset('storage/' . $photo->file_path) }}" alt="{{ $photo->name }}" class="w-20 h-20 object-cover">
+                        <img src="{{ asset('photo-files/' . $photo->file_path) }}" alt="{{ $photo->name }}" class="w-20 h-20 object-cover">
                     </td>
                     <td class="border border-gray-300 px-4 py-2">
                         <a href="{{ route('photos.show', $photo) }}" class="bg-blue-500 text-white px-2 py-1 rounded">View</a>

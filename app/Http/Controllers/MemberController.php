@@ -8,6 +8,8 @@ use App\Models\Province;
 use App\Models\City;
 use App\Models\Division;
 
+use Auth;
+
 class MemberController extends Controller
 {
     /**
@@ -30,11 +32,15 @@ class MemberController extends Controller
         if ($request->filled('division')) {
             $query->where('division', $request->division );
         }
+        if ($request->filled('status')) {
+            $query->where('status', $request->status );
+        }
 
-        $members = $query->paginate(10);
+        $members = $query->orderBy('id', 'desc')->paginate(20);
         $divisions = Division::all(); // Fetch all divisions
+        $listStatus = Member::listStatus();
 
-        return view('members.index', compact('members', 'divisions'));
+        return view('members.index', compact('members', 'divisions', 'listStatus'));
     }
 
     /**
@@ -87,7 +93,9 @@ class MemberController extends Controller
         $provinces = Province::all();
         $cities = City::all();
         $divisions = Division::where('active', 1)->get(); // Only active divisions
-        return view('members.edit', compact('member', 'provinces', 'cities', 'divisions'));
+        $listStatus = Member::listStatus();
+
+        return view('members.edit', compact('member', 'provinces', 'cities', 'divisions', 'listStatus'));
     }
 
     /**
@@ -104,12 +112,12 @@ class MemberController extends Controller
             'province' => 'required|string|max:10',
             'city' => 'required|integer',
             'division' => 'required|integer',
-            'joint_date' => 'required|date',
+            'status' => 'required|string',
             'description' => 'nullable|string',
         ]);
 
         $member->update($validated);
-        return redirect()->route('members.index')->with('success', 'Member updated successfully.');
+        return redirect()->route('members.show', $member->id)->with('success', 'Member updated successfully.');
     }
 
     /**
@@ -119,5 +127,37 @@ class MemberController extends Controller
     {
         $member->delete();
         return redirect()->route('members.index')->with('success', 'Member deleted successfully.');
+    }
+
+    public function approve(Request $request)
+    {
+        $model = Member::find($request->get('member'));
+
+        if($model){
+            $model->status = '2';
+            $model->updated_by = Auth::user()->id;
+            $model->updated_at = date("Y-m-d H:i:s");
+            $model->save();
+
+            return redirect()->route('members.show', $model->id)->with('success', 'Member was approved successfully.');
+        } else {
+            return redirect()->route('members.index')->with('error', 'Member not found.');
+        }
+    }
+
+    public function reject(Request $request)
+    {
+        $model = Member::find($request->get('member'));
+
+        if($model){
+            $model->status = '4';
+            $model->updated_by = Auth::user()->id;
+            $model->updated_at = date("Y-m-d H:i:s");
+            $model->save();
+
+            return redirect()->route('members.show', $model->id)->with('success', 'Member was rejected successfully.');
+        } else {
+            return redirect()->route('members.index')->with('error', 'Member not found.');
+        }
     }
 }

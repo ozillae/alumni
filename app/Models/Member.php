@@ -34,4 +34,20 @@ class Member extends Model
     {
         return $this->belongsTo('App\Models\Division', 'division', 'id');
     }
+
+    public static function listStatus()
+    {
+        return array(
+                '1' => 'New',
+                '2' => 'Verified',
+                '3' => 'Active',
+                '4' => 'Reject'
+            );
+    }
+
+    public function textStatus($status)
+    {
+        $list = self::listStatus();
+        return array_key_exists( $status, $list ) ? $list[ $status ] : 'Undefined';
+    }
 }
