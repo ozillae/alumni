@@ -1,3 +1,18 @@
+Aplikasi untuk Perhimpunan atau persatuan organisasi apa saja sebagai web profil
+Menu Utama
+Tentang
+Kegiatan
+Photo
+Video
+Anggota
+<p>
+    Lebih detail bisa hubungi melaui email: ofauzi49@yahoo.co.id
+    Donasi: <b>BCA no rek 6430097871 a.n. Ahmad Fauzi</b>
+
+</p>
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
